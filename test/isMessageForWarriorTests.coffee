@@ -1,14 +1,12 @@
 assert = require('chai').assert
-mockery = require 'mockery'
-isMessageForWarrior = '../dist/warrior/services/isMessageForWarrior'
+mock = require 'mock-require'
+
 slackMock =
   activeUserId: 253325
 
-mockery.registerAllowable isMessageForWarrior
-mockery.registerMock('./slack/slackClient', slackMock)
-mockery.enable
-  useCleanCache: true
-sut = require isMessageForWarrior
+mock('../dist/warrior/services/slack/slackClient', slackMock)
+
+sut = require '../dist/warrior/services/isMessageForWarrior'
 
 describe 'isMessageForWarrior()', ->
   it 'should return true when a direct message is recieved', ->
