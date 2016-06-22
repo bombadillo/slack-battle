@@ -13,8 +13,8 @@ A Slack bot to battle against
 
 # Tests
 
-`Test Runner` Mocha
-`Assertions` Chai
-`Mocking` Sinon
+* `Test Runner` Mocha
+* `Assertions` Chai
+* `Mocking` Sinon
 
 To run a test use the command `npm test`
