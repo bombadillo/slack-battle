@@ -1,23 +1,21 @@
-assert = require('chai').assert
+test = require 'ava'
 sinon = require 'sinon'
 slackClient = require '../dist/warrior/services/slack/slackClient'
 
 sut = require '../dist/warrior/services/slack/messager'
 
-describe 'messager', ->
-  describe 'sendMessage()', ->
-    sandbox = undefined
-    stubSlackClient = undefined
+sandbox = undefined
+stubSlackClient = undefined
 
-    beforeEach ->
-      sandbox = sinon.sandbox.create()
-      stubSlackClient = sandbox.stub slackClient
+test.beforeEach ->
+  sandbox = sinon.sandbox.create()
+  stubSlackClient = sandbox.stub slackClient
 
-    afterEach ->
-      sandbox.restore()
+test.afterEach ->
+  sandbox.restore()
 
-    it 'should call slackClient.sendMessage', ->
-      message = 'test'
-      channelId = 214
-      sut.sendMessage message, channelId
-      assert stubSlackClient.sendMessage.calledOnce
+test ' sendMessage should call slackClient.sendMessage', (t) ->
+  message = 'test'
+  channelId = 214
+  sut.sendMessage message, channelId
+  t.true stubSlackClient.sendMessage.calledOnce

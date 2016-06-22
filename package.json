@@ -4,18 +4,23 @@
   "description": "Battle deadly opponents on Slack",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers coffee:coffee-script/register",
+    "test": "ava",
     "brew-coffee": "coffee -o dist/ -c src/",
-    "hot-coffee": "coffee -o dist/ -cw src/"
+    "hot-coffee": "coffee -o dist/ -cw src/",
+    "hot-tests": "coffee -o test/ -cw test/"
   },
   "dependencies": {
     "coffee-script": "1.9.0",
     "@slack/client": "*",
     "colors": "*",
     "q": "*",
-    "mocha": "*",
-    "chai": "*",
+    "ava": "*",
     "sinon": "*"
+  },
+  "ava": {
+    "files": [
+      "test/**/*.js"
+    ]
   },
   "author": "",
   "license": "ISC"
