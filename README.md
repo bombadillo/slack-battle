@@ -11,6 +11,12 @@ A Slack bot to battle against
 * `npm brew-coffee`
 * `npm start`
 
+# Bot Interaction
+
+* `attack`
+  * usage `attack @botname`
+  * Deals damage to the bot
+
 # Tests
 
 * Test Runner and Assertions `Ava`

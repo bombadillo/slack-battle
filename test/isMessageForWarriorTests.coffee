@@ -15,19 +15,16 @@ test.afterEach ->
   sandbox.restore()
 
 test 'return true when a direct message is recieved', (t) ->
-  expected = true
   mockMessage = text: 'test', channel: 'D23523'
   result = sut mockMessage
   t.true result
 
 test 'return true when bot ID is in the message text', (t) ->
-  expected = true
   mockMessage = text: '@253325', channel: 'C354235'
   result = sut mockMessage
   t.true result
 
 test 'return false when bot ID not in the message text and is not dm', (t) ->
-  expected = false
   mockMessage = text: '@23221', channel: 'C354235'
   result = sut mockMessage
   t.false result

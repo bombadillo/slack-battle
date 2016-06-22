@@ -1,51 +1,38 @@
 test = require 'ava'
 sinon = require 'sinon'
 
-warriorVitality = {
+class WarriorVitality
+  vitality: 100
   get: ->
-    return 100
-}
+    return @vitality
+  reduce: (amount) ->
+    @vitality -= vitality
+
+warriorVitality = new WarriorVitality()
 
 sut = {
   attack: ->
     vitality = warriorVitality.get()
-    vitality -= 20
-    warriorVitality.set(vitality)
+
+    console.log vitality
+
+    if (vitality > 0)
+      warriorVitality.reduce(vitality)
+
+    return vitality
 }
 
-test 'attack reduces vitality', (t) ->
-
-
-test = require 'ava'
-sinon = require 'sinon'
-slackClient = require '../dist/warrior/services/slack/slackClient'
-
-sut = require '../dist/warrior/services/isMessageForWarrior'
-
 sandbox = undefined
+stubWarriorVitality = undefined
 
 test.beforeEach ->
   sandbox = sinon.sandbox.create()
-  stubSlackClient = sandbox.stub slackClient
-  stubSlackClient.activeUserId = 253325
+  stubWarriorVitality = sandbox.stub warriorVitality
+  sandbox.stub(warriorVitality, 'get').returns(100)
 
 test.afterEach ->
   sandbox.restore()
 
-test 'return true when a direct message is recieved', (t) ->
-  expected = true
-  mockMessage = text: 'test', channel: 'D23523'
-  result = sut mockMessage
-  t.true result
-
-test 'return true when bot ID is in the message text', (t) ->
-  expected = true
-  mockMessage = text: '@253325', channel: 'C354235'
-  result = sut mockMessage
-  t.true result
-
-test 'return false when bot ID not in the message text and is not dm', (t) ->
-  expected = false
-  mockMessage = text: '@23221', channel: 'C354235'
-  result = sut mockMessage
-  t.false result
+test 'attack reduces vitality', (t) ->
+  sut.attack()
+  t.true stubWarriorVitality.reduce.calledOnce

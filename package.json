@@ -4,7 +4,7 @@
   "description": "Battle deadly opponents on Slack",
   "main": "index.js",
   "scripts": {
-    "test": "ava",
+    "test": "ava test/attackWarriorTests.js",
     "brew-coffee": "coffee -o dist/ -c src/",
     "hot-coffee": "coffee -o dist/ -cw src/",
     "hot-tests": "coffee -o test/ -cw test/"
