@@ -15,7 +15,7 @@
     "q": "*",
     "mocha": "*",
     "chai": "*",
-    "mock-require": "*"
+    "sinon": "*"
   },
   "author": "",
   "license": "ISC"

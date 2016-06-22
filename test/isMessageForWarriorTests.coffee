@@ -1,14 +1,21 @@
 assert = require('chai').assert
-mock = require 'mock-require'
-
-slackMock =
-  activeUserId: 253325
-
-mock('../dist/warrior/services/slack/slackClient', slackMock)
+sinon = require 'sinon'
+slackClient = require '../dist/warrior/services/slack/slackClient'
 
 sut = require '../dist/warrior/services/isMessageForWarrior'
 
 describe 'isMessageForWarrior()', ->
+
+  sandbox = undefined
+
+  beforeEach ->
+    sandbox = sinon.sandbox.create()
+    stubSlackClient = sandbox.stub slackClient
+    stubSlackClient.activeUserId = 253325
+
+  afterEach ->
+    sandbox.restore()
+
   it 'should return true when a direct message is recieved', ->
     expected = true
     mockMessage = text: 'test', channel: 'D23523'
