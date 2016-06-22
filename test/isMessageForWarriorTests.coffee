@@ -17,13 +17,13 @@ describe 'isMessageForWarrior()', ->
     result = sut mockMessage
     assert.equal expected, result
 
-  it 'should return true when the bot ID is in the message text', ->
+  it 'should return true when bot ID is in the message text', ->
     expected = true
     mockMessage = text: '@253325', channel: 'C354235'
     result = sut mockMessage
     assert.equal expected, result
 
-  it 'should return false when the bot ID is not in the message text', ->
+  it 'should return false when bot ID not in the message text and is not dm', ->
     expected = false
     mockMessage = text: '@23221', channel: 'C354235'
     result = sut mockMessage
