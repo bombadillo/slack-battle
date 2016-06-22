@@ -13,7 +13,7 @@ A Slack bot to battle against
 
 # Tests
 
-`Test Runner` Mocha
+`Test Runner` Ava
 `Assertions` Chai
 `Mocking` Sinon
 
