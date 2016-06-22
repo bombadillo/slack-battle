@@ -9,8 +9,13 @@ describe 'warriorVitality', ->
       assert.equal 100, result
 
   describe 'reduce()', ->
-    it 'should reduce vitality attack', ->
+    it 'should reduce vitality', ->
       sut.reduce 20
       result = sut.get()
       assert.equal 80, result
+
+    it 'should reduce to 0 when the dmg amount > vitality', ->
+      sut.reduce 120
+      result = sut.get()
+      assert.equal 0, result
 
