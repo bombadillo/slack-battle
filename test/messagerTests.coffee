@@ -11,7 +11,7 @@ describe 'messager', ->
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
-      stubSlackClient = sandbox.stub(slackClient, 'sendMessage').returns true
+      stubSlackClient = sandbox.stub slackClient
 
     afterEach ->
       sandbox.restore()
@@ -20,4 +20,4 @@ describe 'messager', ->
       message = 'test'
       channelId = 214
       sut.sendMessage message, channelId
-      assert stubSlackClient.calledOnce
+      assert stubSlackClient.sendMessage.calledOnce
