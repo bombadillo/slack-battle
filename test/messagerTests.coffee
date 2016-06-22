@@ -6,9 +6,6 @@ sut = require '../dist/warrior/services/slack/messager'
 
 describe 'messager', ->
   describe 'sendMessage()', ->
-
-    message = 'test'
-    channelId = 214
     sandbox = undefined
     stubSlackClient = undefined
 
@@ -20,5 +17,7 @@ describe 'messager', ->
       sandbox.restore()
 
     it 'should call slackClient.sendMessage', ->
+      message = 'test'
+      channelId = 214
       sut.sendMessage message, channelId
       assert stubSlackClient.calledOnce
