@@ -10,12 +10,17 @@ describe 'attackWarrior', ->
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
-      stubWarriorVitality = sandbox.stub warriorVitality
-      stubWarriorVitality.get.returns 100
+      stubWarriorVitality = sandbox.stub warriorVitality      
 
     afterEach ->
       sandbox.restore()
 
-    it 'should call warriorVitality.reduce()', ->
+    it 'should call warriorVitality.reduce() if warrior has health', ->
+      stubWarriorVitality.get.returns 100
       sut.attack()
       assert stubWarriorVitality.reduce.calledOnce
+
+    it 'should not call warriorVitality.reduce() if warrior has no health', ->
+      stubWarriorVitality.get.returns 0
+      sut.attack()
+      assert.isFalse stubWarriorVitality.reduce.calledOnce
