@@ -13,8 +13,7 @@ A Slack bot to battle against
 
 # Tests
 
-`Test Runner` Ava
-`Assertions` Chai
-`Mocking` Sinon
+* Test Runner and Assertions `Ava`
+* Mocking `Sinon`
 
 To run a test use the command `npm test`
