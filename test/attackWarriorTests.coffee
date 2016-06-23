@@ -18,7 +18,7 @@ describe 'attackWarrior', ->
     it 'should call warriorVitality.reduce() if warrior has health', ->
       stubWarriorVitality.get.returns 100
       sut.attack()
-      assert stubWarriorVitality.reduce.calledOnce
+      assert.isTrue stubWarriorVitality.reduce.calledOnce
 
     it 'should not call warriorVitality.reduce() if warrior has no health', ->
       stubWarriorVitality.get.returns 0
