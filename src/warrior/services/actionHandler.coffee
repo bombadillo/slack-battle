@@ -1,6 +1,7 @@
 messageParser = require './messageParser'
 messager = require './slack/messager'
 attackWarrior = require './attackWarrior'
+commandListDisplayer = require './commandListDisplayer'
 
 process = (message) ->
   message.parsedMessage = messageParser.parse message.text
@@ -16,6 +17,8 @@ onParsedMessage = (message) ->
   switch message.parsedMessage.action
     when 'attack'
       attackWarrior.attack message
+    when 'help'
+      commandListDisplayer.displayAll message
     else
       messager.sendMessage 'Command not recognised', message.channel
 
