@@ -10,7 +10,7 @@ describe 'attackWarrior', ->
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
-      stubWarriorVitality = sandbox.stub warriorVitality      
+      stubWarriorVitality = sandbox.stub warriorVitality
 
     afterEach ->
       sandbox.restore()

@@ -1,8 +1,8 @@
 assert = require('chai').assert
 sinon = require 'sinon'
-slackClient = require '../dist/warrior/services/slack/slackClient'
+slackClient = require '../src/warrior/services/slack/slackClient'
 
-sut = require '../dist/warrior/services/slack/messager'
+sut = require '../src/warrior/services/slack/messager'
 
 describe 'messager', ->
   describe 'sendMessage()', ->
