@@ -15,7 +15,6 @@ onParsedMessage = (message) ->
 
   switch message.parsedMessage.action
     when 'attack'
-      console.log 'attack'
       attackWarrior.attack message
     else
       messager.sendMessage 'Command not recognised', message.channel
