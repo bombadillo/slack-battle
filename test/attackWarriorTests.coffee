@@ -1,5 +1,6 @@
 assert = require('chai').assert
 sinon = require 'sinon'
+config = require '../src/common/config/index'
 warriorVitality = require '../src/warrior/classes/warriorVitality'
 messager = require '../src/warrior/services/slack/messager'
 sut = require '../src/warrior/services/attackWarrior'
@@ -39,7 +40,7 @@ describe 'attackWarrior', ->
       stubWarriorVitality.get
         .onFirstCall().returns(20)
         .onSecondCall().returns(0)
-      text = 'The warrior is dead! :skull:'
+      text = config.messages.deadWarrior
       sut.attack message
       sinon.assert.calledWith stubMessager.sendMessage, text, message.channel
 

@@ -1,3 +1,4 @@
+config = require '../../common/config/index'
 warriorVitality = require '../classes/warriorVitality'
 messager = require './slack/messager'
 
@@ -17,7 +18,7 @@ attack = (message) ->
     status += "`Vitality: #{vitality}`"
     messager.sendMessage status, message.channel
   else
-    messager.sendMessage "The warrior is dead! :skull:", message.channel
+    messager.sendMessage config.messages.deadWarrior, message.channel
 
 exports = this
 exports.attack = attack
