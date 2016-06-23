@@ -30,3 +30,16 @@ describe 'attackWarrior', ->
       stubWarriorVitality.get.returns 0
       sut.attack message
       assert.isFalse stubWarriorVitality.reduce.calledOnce
+
+    it 'should call warriorVitality.get() twice', ->
+      sut.attack message
+      assert.isTrue stubWarriorVitality.get.calledTwice
+      
+    it 'should send dead message if vitality is 0 after an attack', ->
+      stubWarriorVitality.get
+        .onFirstCall().returns(20)
+        .onSecondCall().returns(0)
+      text = 'The warrior is dead! :skull:'
+      sut.attack message
+      sinon.assert.calledWith stubMessager.sendMessage, text, message.channel
+
