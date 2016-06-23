@@ -2,6 +2,7 @@ slack = require './services/slack/slackClient'
 messager = require './services/slack/messager'
 log = require '../common/services/log'
 isMessageForWarrior = require './services/isMessageForWarrior'
+actionHandler = require './services/actionHandler'
 
 start = ->
   slack.on 'open', ->
@@ -9,8 +10,7 @@ start = ->
 
   slack.on 'message', (message) ->
     if isMessageForWarrior message
-      messager.sendMessage 'I will defeat you!', message.channel
-      
+      actionHandler.process message
 
   slack.on 'error', (err) ->
     log.error "Error", err
