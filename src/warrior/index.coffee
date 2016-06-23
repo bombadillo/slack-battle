@@ -10,6 +10,7 @@ start = ->
   slack.on 'message', (message) ->
     if isMessageForWarrior message
       messager.sendMessage 'I will defeat you!', message.channel
+      
 
   slack.on 'error', (err) ->
     log.error "Error", err
