@@ -9,4 +9,4 @@ attack = ->
   return vitality
 
 exports = this
-this.attack = attack
+exports.attack = attack
