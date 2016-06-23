@@ -3,7 +3,7 @@ messager = require './slack/messager'
 attackWarrior = require './attackWarrior'
 
 process = (message) ->
-  message.parsedMessage = messageParser.parse message
+  message.parsedMessage = messageParser.parse message.text
 
   if message.parsedMessage
     onParsedMessage message

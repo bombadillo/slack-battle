@@ -35,3 +35,8 @@ describe 'actionHandler', ->
       message.text = ''
       sut.process message
       assert.isFalse spyAttackWarrior.attack.calledOnce
+
+    it 'should call message parser with string', ->
+      message.text = 'attack @23524'
+      sut.process message
+      sinon.assert.calledWith stubMessageParser.parse, message.text
