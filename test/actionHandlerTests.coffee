@@ -20,12 +20,18 @@ describe 'actionHandler', ->
       stubMessageParser = sandbox.stub messageParser
       stubMessager = sandbox.stub messager
       spyAttackWarrior = sandbox.stub attackWarrior
-      stubMessageParser.parse.returns action: 'attack'
 
     afterEach ->
       sandbox.restore()
 
-    it 'should call attackWarrior.attack()', ->
+    it 'should call attackWarrior.attack() when message parsed', ->
+      stubMessageParser.parse.returns action: 'attack'
       message.text = 'attack @23523'
       sut.process message
       assert.isTrue spyAttackWarrior.attack.calledOnce
+
+    it 'should not call attackWarrior.attack() when message not parsed', ->
+      stubMessageParser.parse.returns false
+      message.text = ''
+      sut.process message
+      assert.isFalse spyAttackWarrior.attack.calledOnce
