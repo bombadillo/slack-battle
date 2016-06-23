@@ -18,10 +18,10 @@ onParsedMessage = (message) ->
       console.log 'attack'
       attackWarrior.attack()
     else
-      messager.sendMessage 'Command not recognised', message.channelId
+      messager.sendMessage 'Command not recognised', message.channel
 
 onParseFail = (message) ->
-  messager.sendMessage 'Command not recognised', message.channelId
+  messager.sendMessage 'Command not recognised', message.channel
 
 exports = this
 exports.process = process
