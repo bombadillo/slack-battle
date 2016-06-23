@@ -4,8 +4,8 @@ attack = ->
   vitality = warriorVitality.get()
 
   if (vitality > 0)
-    warriorVitality.reduce(vitality)
-
+    warriorVitality.reduce 20
+  console.log vitality
   return vitality
 
 exports = this
