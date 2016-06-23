@@ -4,9 +4,9 @@ sut = require '../src/warrior/classes/warriorVitality'
 
 describe 'warriorVitality', ->
   describe 'get()', ->
-    it 'should return 100 e.g. full health', ->
+    it 'should return full health', ->
       result = sut.get()
-      assert.equal 100, result
+      assert.equal sut.maxVitality, result
 
   describe 'reduce()', ->
     it 'should reduce vitality', ->
@@ -18,4 +18,10 @@ describe 'warriorVitality', ->
       sut.reduce 120
       result = sut.get()
       assert.equal 0, result
+
+  describe 'revitalise()', ->
+    it 'should increase warrior to 80% health', ->
+      sut.revitalise()
+      result = sut.get()
+      assert.equal 80, result
 
