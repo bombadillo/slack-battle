@@ -1,7 +1,7 @@
 assert = require('chai').assert
 sinon = require 'sinon'
 messageParser = require '../src/warrior/services/messageParser'
-attackWarrior = require '../src/warrior/services/attackWarrior'
+warrior = require '../src/warrior/classes/warrior'
 messager = require '../src/warrior/services/slack/messager'
 commandListDisplayer = require '../src/warrior/services/commandListDisplayer'
 sut = require '../src/warrior/services/actionHandler'
@@ -13,7 +13,7 @@ describe 'actionHandler', ->
     message = undefined
     sandbox = undefined
     stubMessageParser = undefined
-    spyAttackWarrior = undefined
+    spyWarrior = undefined
     stubCommandListDisplayer = undefined
 
     beforeEach ->
@@ -21,21 +21,21 @@ describe 'actionHandler', ->
       sandbox = sinon.sandbox.create()
       stubMessageParser = sandbox.stub messageParser
       stubMessager = sandbox.stub messager
-      spyAttackWarrior = sandbox.stub attackWarrior
+      spyWarrior = sandbox.stub warrior
       stubCommandListDisplayer = sandbox.stub commandListDisplayer
 
     afterEach ->
       sandbox.restore()
 
-    it 'should call attackWarrior.attack() when action is attack', ->
+    it 'should call warrior.attack() when action is attack', ->
       stubMessageParser.parse.returns action: 'attack'
       sut.process message
-      assert.isTrue spyAttackWarrior.attack.calledOnce
+      assert.isTrue spyWarrior.attack.calledOnce
 
-    it 'should not call attackWarrior.attack() when message not parsed', ->
+    it 'should not call warrior.attack() when message not parsed', ->
       stubMessageParser.parse.returns false
       sut.process message
-      assert.isFalse spyAttackWarrior.attack.calledOnce
+      assert.isFalse spyWarrior.attack.calledOnce
 
     it 'should call message parser with string', ->
       sut.process message
