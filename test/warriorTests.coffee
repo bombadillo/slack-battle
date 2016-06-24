@@ -24,6 +24,7 @@ describe 'Warrior', ->
       assert.isTrue stubWarriorVitality.revitalise.calledOnce
   
   describe 'attack()', ->
-    it 'should call attackWarrior.attack()', ->
-      sut.attack()
-      assert.isTrue stubAttackWarrior.attack.calledOnce
+    it 'should call attackWarrior.attack() with message', ->
+      message = {}
+      sut.attack message
+      sinon.assert.calledWith stubAttackWarrior.attack, message

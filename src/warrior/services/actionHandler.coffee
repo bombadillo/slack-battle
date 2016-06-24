@@ -1,6 +1,5 @@
 messageParser = require './messageParser'
 messager = require './slack/messager'
-attackWarrior = require './attackWarrior'
 warrior = require '../classes/warrior'
 commandListDisplayer = require './commandListDisplayer'
 config = require '../../common/config/index'
@@ -18,7 +17,7 @@ onParsedMessage = (message) ->
 
   switch message.parsedMessage.action
     when 'attack'
-      attackWarrior.attack message
+      warrior.attack message
     when 'help'
       commandListDisplayer.displayAll message
     when 'revitalise'

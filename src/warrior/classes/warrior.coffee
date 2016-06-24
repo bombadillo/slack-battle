@@ -5,7 +5,7 @@ class Warrior
   revitalise: ->
     warriorVitality.revitalise()
 
-  attack: ->
-    attackWarrior.attack()
+  attack: (message) ->
+    attackWarrior.attack message
 
 module.exports = new Warrior()
