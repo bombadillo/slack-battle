@@ -2,6 +2,7 @@ messageParser = require './messageParser'
 messager = require './slack/messager'
 attackWarrior = require './attackWarrior'
 commandListDisplayer = require './commandListDisplayer'
+config = require '../../common/config/index'
 
 process = (message) ->
   message.parsedMessage = messageParser.parse message.text
@@ -20,10 +21,10 @@ onParsedMessage = (message) ->
     when 'help'
       commandListDisplayer.displayAll message
     else
-      messager.sendMessage 'Command not recognised', message.channel
+      messager.sendMessage config.commandNotRecognised, message.channel
 
 onParseFail = (message) ->
-  messager.sendMessage 'Command not recognised', message.channel
+  messager.sendMessage config.commandNotRecognised, message.channel
 
 exports = this
 exports.process = process
