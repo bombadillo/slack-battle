@@ -1,15 +1,23 @@
 WarriorVitality = require './warriorVitality'
 attackWarrior = require '../services/attackWarrior'
+warriorStatusDisplayer = require '../services/warriorStatusDisplayer'
 
-class Warrior
+vitality = new WarriorVitality()
 
-  constructor: ->
-    @vitality = new WarriorVitality()
+revitalise = ->
+  vitality.revitalise()
 
-  revitalise: ->
-    @vitality.revitalise()
+attack = (message) ->
+  attackWarrior.attack message
 
-  attack: (message) ->
-    attackWarrior.attack @, message
+displayStatus = (message) ->
+  warriorStatusDisplayer.display message
 
-module.exports = new Warrior()
+getVitality = ->
+  return vitality.get()
+
+exports = this
+this.revitalise = revitalise
+this.attack = attack
+this.displayStatus = displayStatus
+this.getVitality = getVitality

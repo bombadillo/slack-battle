@@ -1,6 +1,7 @@
 assert = require('chai').assert
 sinon = require 'sinon'
 config = require '../src/common/config/index'
+warrior = require '../src/warrior/classes/warrior'
 WarriorVitality = require '../src/warrior/classes/warriorVitality'
 messager = require '../src/warrior/services/slack/messager'
 sut = require '../src/warrior/services/attackWarrior'
@@ -11,26 +12,25 @@ describe 'attackWarrior', ->
       text: 'test'
       channel: 124
     sandbox = undefined
-    stubWarriorVitalityGet = undefined
-    stubWarriorVitalityReduce = undefined
+    stubWarrior = undefined
     stubMessager = undefined
-    sut.vitality = new WarriorVitality()
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
-      stubWarriorVitalityGet = sandbox.stub sut.vitality, 'get'
-      stubWarriorVitalityReduce = sandbox.stub sut.vitality, 'reduce'
+      stubWarrior = sandbox.stub warrior
       stubMessager = sandbox.stub messager
+      stubWarrior.getVitality.returns 5
+      stubWarrior.vitality = sandbox.stub new WarriorVitality()
 
     afterEach ->
       sandbox.restore()
 
-    it 'should call warriorVitality.reduce() if warrior has health', ->
-      stubWarriorVitalityGet.returns 100
+    it 'should call attack() if warrior has health', ->
+      stubWarrior.getVitality.returns 100
       sut.attack sut, message
-      assert.isTrue stubWarriorVitalityReduce.calledOnce
+      assert.isTrue stubWarrior.vitality.reduce.calledOnce
 
-    it 'should not call warriorVitality.reduce() if warrior has no health', ->
-      stubWarriorVitalityGet.returns 0
+    it 'should not call attack.reduce() if warrior has no health', ->
+      stubWarrior.getVitality.returns 0
       sut.attack sut, message
-      assert.isFalse stubWarriorVitalityReduce.calledOnce
+      assert.isFalse stubWarrior.vitality.reduce.calledOnce

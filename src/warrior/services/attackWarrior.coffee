@@ -1,8 +1,9 @@
 config = require '../../common/config/index'
 messager = require './slack/messager'
+warrior = require '../classes/warrior'
 
-attack = (warrior, message) ->
-  vitality = warrior.vitality.get()
+attack = (message) ->
+  vitality = warrior.getVitality()
 
   if (vitality > 0)
     dmg = 20

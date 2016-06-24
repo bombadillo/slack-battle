@@ -9,13 +9,12 @@ describe 'warriorStatusDisplayer', ->
   message = channel: 1
   sandbox = undefined
   stubMessager = undefined
+  stubWarrior = undefined
 
   beforeEach ->
     sandbox = sinon.sandbox.create()
     stubMessager = sandbox.stub messager
     stubWarrior = sandbox.stub warrior
-    stubVitalityGet = sandbox.stub warrior.vitality, 'get'
-    stubVitalityGet.returns 20
 
   afterEach ->
     sandbox.restore()

@@ -1,8 +1,9 @@
 messager = require './slack/messager'
 warrior = require '../classes/warrior'
+config = require '../../common/config/index'
 
 display = (message) ->
-  vitality = warrior.vitality.get()
+  vitality = warrior.getVitality()
   if vitality > 0
     status = '*Warrior status* \n'
     status += "`Vitality: #{vitality}`"
