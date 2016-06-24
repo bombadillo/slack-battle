@@ -18,7 +18,6 @@ describe 'attackWarrior', ->
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
-      console.log sut.vitality
       stubWarriorVitalityGet = sandbox.stub sut.vitality, 'get'
       stubWarriorVitalityReduce = sandbox.stub sut.vitality, 'reduce'
       stubMessager = sandbox.stub messager
