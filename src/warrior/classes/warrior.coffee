@@ -14,7 +14,7 @@ displayStatus = (message) ->
   warriorStatusDisplayer.display message
 
 getVitality = ->
-  return vitality.get()
+  return vitality
 
 exports = this
 this.revitalise = revitalise

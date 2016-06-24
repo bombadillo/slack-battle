@@ -14,23 +14,25 @@ describe 'attackWarrior', ->
     sandbox = undefined
     stubWarrior = undefined
     stubMessager = undefined
+    stubVitality = undefined
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
       stubWarrior = sandbox.stub warrior
       stubMessager = sandbox.stub messager
-      stubWarrior.getVitality.returns 5
-      stubWarrior.vitality = sandbox.stub new WarriorVitality()
+      stubVitality = sandbox.stub new WarriorVitality()
+      stubWarrior.getVitality.returns stubVitality
+      stubWarrior.vitality = stubVitality
 
     afterEach ->
       sandbox.restore()
 
     it 'should call attack() if warrior has health', ->
-      stubWarrior.getVitality.returns 100
+      stubVitality.get.returns 100
       sut.attack sut, message
       assert.isTrue stubWarrior.vitality.reduce.calledOnce
 
     it 'should not call attack.reduce() if warrior has no health', ->
-      stubWarrior.getVitality.returns 0
+      stubVitality.get.returns 0
       sut.attack sut, message
       assert.isFalse stubWarrior.vitality.reduce.calledOnce

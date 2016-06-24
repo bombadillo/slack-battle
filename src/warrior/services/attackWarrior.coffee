@@ -4,10 +4,9 @@ warrior = require '../classes/warrior'
 
 attack = (message) ->
   vitality = warrior.getVitality()
-
-  if (vitality > 0)
+  if (vitality.get() > 0)
     dmg = 20
-    warrior.vitality.reduce dmg
+    vitality.reduce dmg
     messager.sendMessage "You deal `#{dmg}` dmg :bomb: \n", message.channel
     status = "Ouch! \n"
 
