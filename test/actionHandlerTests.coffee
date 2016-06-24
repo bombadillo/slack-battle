@@ -14,7 +14,7 @@ describe 'actionHandler', ->
     sandbox = undefined
     stubMessager = undefined
     stubMessageParser = undefined
-    spyWarrior = undefined
+    stubWarrior = undefined
     stubCommandListDisplayer = undefined
 
     beforeEach ->
@@ -22,7 +22,7 @@ describe 'actionHandler', ->
       sandbox = sinon.sandbox.create()
       stubMessageParser = sandbox.stub messageParser
       stubMessager = sandbox.stub messager
-      spyWarrior = sandbox.stub warrior
+      stubWarrior = sandbox.stub warrior
       stubCommandListDisplayer = sandbox.stub commandListDisplayer
 
     afterEach ->
@@ -31,7 +31,7 @@ describe 'actionHandler', ->
     it 'should call warrior.attack() when action is attack', ->
       stubMessageParser.parse.returns action: 'attack'
       sut.process message
-      assert.isTrue spyWarrior.attack.calledOnce
+      assert.isTrue stubWarrior.attack.calledOnce
 
     it 'should call message.sendMessage() when message not parsed', ->
       stubMessageParser.parse.returns false
@@ -42,7 +42,12 @@ describe 'actionHandler', ->
       sut.process message
       sinon.assert.calledWith stubMessageParser.parse, message.text
 
-    it 'should call commandListDisplayer.displayAll when action is help', ->
+    it 'should call commandListDisplayer.displayAll() when action is help', ->
       stubMessageParser.parse.returns action: 'help'
       sut.process message
       assert.isTrue stubCommandListDisplayer.displayAll.calledOnce
+
+    it 'should call warrior.revitalise() when action is revitalise', ->
+      stubMessageParser.parse.returns action: 'revitalise'
+      sut.process message
+      assert.isTrue stubWarrior.revitalise.calledOnce
