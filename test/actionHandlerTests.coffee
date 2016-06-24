@@ -12,6 +12,7 @@ describe 'actionHandler', ->
 
     message = undefined
     sandbox = undefined
+    stubMessager = undefined
     stubMessageParser = undefined
     spyWarrior = undefined
     stubCommandListDisplayer = undefined
@@ -32,10 +33,10 @@ describe 'actionHandler', ->
       sut.process message
       assert.isTrue spyWarrior.attack.calledOnce
 
-    it 'should not call warrior.attack() when message not parsed', ->
+    it 'should call message.sendMessage() when message not parsed', ->
       stubMessageParser.parse.returns false
       sut.process message
-      assert.isFalse spyWarrior.attack.calledOnce
+      assert.isTrue stubMessager.sendMessage.calledOnce
 
     it 'should call message parser with string', ->
       sut.process message
