@@ -2,6 +2,7 @@ messageParser = require './messageParser'
 messager = require './slack/messager'
 warrior = require '../classes/warrior'
 commandListDisplayer = require './commandListDisplayer'
+statusDisplayer = require './warriorStatusDisplayer'
 config = require '../../common/config/index'
 
 process = (message) ->
@@ -18,10 +19,12 @@ onParsedMessage = (message) ->
   switch message.parsedMessage.action
     when 'attack'
       warrior.attack message
+      statusDisplayer.display message
     when 'help'
       commandListDisplayer.displayAll message
     when 'revitalise'
       warrior.revitalise()
+      statusDisplayer.display message
     else
       messager.sendMessage config.messages.commandNotRecognised, message.channel
 
