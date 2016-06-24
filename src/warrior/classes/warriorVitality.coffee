@@ -15,4 +15,4 @@ class WarriorVitality
     if @vitality < vitalityRevitalised
       @vitality = (@maxVitality / 100) * 80
 
-module.exports = new WarriorVitality()
+module.exports = WarriorVitality

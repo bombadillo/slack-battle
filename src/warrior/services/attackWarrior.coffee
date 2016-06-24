@@ -1,24 +1,14 @@
 config = require '../../common/config/index'
-warriorVitality = require '../classes/warriorVitality'
 messager = require './slack/messager'
 
-attack = (message) ->
-  vitality = warriorVitality.get()
+attack = (warrior, message) ->
+  vitality = warrior.vitality.get()
 
   if (vitality > 0)
     dmg = 20
-    warriorVitality.reduce dmg
+    warrior.vitality.reduce dmg
     messager.sendMessage "You deal `#{dmg}` dmg :bomb: \n", message.channel
-
-  vitality = warriorVitality.get()
-
-  if vitality > 0
     status = "Ouch! \n"
-    status += '*Warrior status* \n'
-    status += "`Vitality: #{vitality}`"
-    messager.sendMessage status, message.channel
-  else
-    messager.sendMessage config.messages.deadWarrior, message.channel
 
 exports = this
 exports.attack = attack

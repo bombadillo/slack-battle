@@ -1,7 +1,7 @@
 assert = require('chai').assert
 sinon = require 'sinon'
 config = require '../src/common/config/index'
-warriorVitality = require '../src/warrior/classes/warriorVitality'
+WarriorVitality = require '../src/warrior/classes/warriorVitality'
 messager = require '../src/warrior/services/slack/messager'
 sut = require '../src/warrior/services/attackWarrior'
 
@@ -11,36 +11,27 @@ describe 'attackWarrior', ->
       text: 'test'
       channel: 124
     sandbox = undefined
-    stubWarriorVitality = undefined
+    stubWarriorVitalityGet = undefined
+    stubWarriorVitalityReduce = undefined
     stubMessager = undefined
+    sut.vitality = new WarriorVitality()
 
     beforeEach ->
       sandbox = sinon.sandbox.create()
-      stubWarriorVitality = sandbox.stub warriorVitality
+      console.log sut.vitality
+      stubWarriorVitalityGet = sandbox.stub sut.vitality, 'get'
+      stubWarriorVitalityReduce = sandbox.stub sut.vitality, 'reduce'
       stubMessager = sandbox.stub messager
 
     afterEach ->
       sandbox.restore()
 
     it 'should call warriorVitality.reduce() if warrior has health', ->
-      stubWarriorVitality.get.returns 100
-      sut.attack message
-      assert.isTrue stubWarriorVitality.reduce.calledOnce
+      stubWarriorVitalityGet.returns 100
+      sut.attack sut, message
+      assert.isTrue stubWarriorVitalityReduce.calledOnce
 
     it 'should not call warriorVitality.reduce() if warrior has no health', ->
-      stubWarriorVitality.get.returns 0
-      sut.attack message
-      assert.isFalse stubWarriorVitality.reduce.calledOnce
-
-    it 'should call warriorVitality.get() twice', ->
-      sut.attack message
-      assert.isTrue stubWarriorVitality.get.calledTwice
-      
-    it 'should send dead message if vitality is 0 after an attack', ->
-      stubWarriorVitality.get
-        .onFirstCall().returns(20)
-        .onSecondCall().returns(0)
-      text = config.messages.deadWarrior
-      sut.attack message
-      sinon.assert.calledWith stubMessager.sendMessage, text, message.channel
-
+      stubWarriorVitalityGet.returns 0
+      sut.attack sut, message
+      assert.isFalse stubWarriorVitalityReduce.calledOnce

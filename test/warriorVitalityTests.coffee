@@ -1,6 +1,7 @@
 assert = require('chai').assert
 sinon = require 'sinon'
-sut = require '../src/warrior/classes/warriorVitality'
+WarriorVitality = require '../src/warrior/classes/warriorVitality'
+sut = new WarriorVitality()
 
 describe 'warriorVitality', ->
 

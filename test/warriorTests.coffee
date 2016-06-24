@@ -1,6 +1,5 @@
 assert = require('chai').assert
 sinon = require 'sinon'
-warriorVitality = require '../src/warrior/classes/warriorVitality'
 attackWarrior = require '../src/warrior/services/attackWarrior'
 sut = require '../src/warrior/classes/warrior'
 
@@ -12,7 +11,7 @@ describe 'Warrior', ->
 
   beforeEach ->
     sandbox = sinon.sandbox.create()
-    stubWarriorVitality = sandbox.stub warriorVitality
+    stubWarriorVitality = sandbox.stub sut.vitality
     stubAttackWarrior = sandbox.stub attackWarrior
 
   afterEach ->
@@ -27,4 +26,4 @@ describe 'Warrior', ->
     it 'should call attackWarrior.attack() with message', ->
       message = {}
       sut.attack message
-      sinon.assert.calledWith stubAttackWarrior.attack, message
+      sinon.assert.calledWith stubAttackWarrior.attack, sut, message
