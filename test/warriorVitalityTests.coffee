@@ -3,6 +3,10 @@ sinon = require 'sinon'
 sut = require '../src/warrior/classes/warriorVitality'
 
 describe 'warriorVitality', ->
+
+  beforeEach ->
+    sut.vitality = 100
+
   describe 'get()', ->
     it 'should return full health', ->
       result = sut.get()
@@ -20,7 +24,25 @@ describe 'warriorVitality', ->
       assert.equal 0, result
 
   describe 'revitalise()', ->
-    it 'should increase warrior to 80% health', ->
+    it 'should increase warrior to 80% health if damage below threshold', ->
+      sut.reduce 60
+      sut.revitalise()
+      result = sut.get()
+      assert.equal 80, result
+
+    it 'should increase warrior to 80% health if damage below threshold', ->
+      sut.reduce 21
+      sut.revitalise()
+      result = sut.get()
+      assert.equal 80, result
+
+    it 'should not revitalise when health is above threshold', ->
+      sut.revitalise()
+      result = sut.get()
+      assert.equal 100, result
+
+    it 'should not revitalise when health is on threshold', ->
+      sut.reduce 20
       sut.revitalise()
       result = sut.get()
       assert.equal 80, result
