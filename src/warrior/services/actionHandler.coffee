@@ -21,10 +21,10 @@ onParsedMessage = (message) ->
     when 'help'
       commandListDisplayer.displayAll message
     else
-      messager.sendMessage config.commandNotRecognised, message.channel
+      messager.sendMessage config.messages.commandNotRecognised, message.channel
 
 onParseFail = (message) ->
-  messager.sendMessage config.commandNotRecognised, message.channel
+  messager.sendMessage config.messages.commandNotRecognised, message.channel
 
 exports = this
 exports.process = process
