@@ -12,9 +12,6 @@ class WarriorVitality
     @vitality -= amount
   revitalise: ->
     vitalityRevitalised = Math.round (@maxVitality / 100) * 80
-    console.log vitalityRevitalised
-    console.log @vitality
-    console.log @vitality < vitalityRevitalised
     if @vitality < vitalityRevitalised
       @vitality = (@maxVitality / 100) * 80
 
